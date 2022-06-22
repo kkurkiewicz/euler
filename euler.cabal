@@ -1,0 +1,461 @@
+cabal-version:       2.4
+name:                euler
+version:             0.1.0.0
+synopsis:            My solutions to the Project Euler / ProjectEuler+
+                     programming problems
+description:         A small program showing numerical answers to the
+                     Project Euler / ProjectEuler+ programming problems
+homepage:            https://github.com/kkurkiewicz/euler
+bug-reports:         https://github.com/kkurkiewicz/euler/issues
+license:             NONE
+license-file:        LICENCE.md
+author:              Kamil Kurkiewicz
+maintainer:          Kamil Kurkiewicz <k-kurkiewicz@outlook.com>
+--copyright:           
+category:            Practice
+extra-source-files:  AUTHOR.md,
+                     CHANGELOG.md,
+                     INSTALL.md,
+                     README.md
+stability:           provisional
+--tested-with:         GHC == 7.6.3,
+--                     GHC == 8.6.5
+tested-with:         GHC == 8.6.5
+
+
+-- 
+source-repository head
+
+    type:        git
+    location:    git://github.com/kkurkiewicz/euler.git
+
+
+---- 
+--source-repository this
+--
+--    type:        git
+--    location:    git://github.com/kkurkiewicz/euler.git
+--    tag:         
+
+
+-- 
+common shared-properties
+
+    default-language:    Haskell2010
+    default-extensions:  BangPatterns,
+                         CPP,
+                         FlexibleInstances,
+                         FunctionalDependencies,
+                         PackageImports,
+                         TupleSections,
+                         TypeApplications
+    ghc-options:         -ferror-spans -O2 -Wall -Widentities -Wmissing-export-lists -Wredundant-constraints
+
+
+-- 
+library euler-internal
+
+    import:              shared-properties
+    hs-source-dirs:      src
+    exposed-modules:     Euler.Data.DifferenceList,
+                         Euler.Data.FenwickTree,
+                         Euler.Data.HashTable,
+                         --Euler.Data.Optional,
+                         Euler.Data.PairingHeap,
+                         Euler.Data.PaulsonQueue,
+                         Euler.Data.Predicate,
+                         Euler.Data.PriorityQueue,
+                         Euler.Data.Queue,
+                         Euler.Data.SkewHeap,
+                         Euler.Data.SplayTree,
+                         Euler.Data.Tree,
+                         Euler.Data.UnboundedArray,
+                         Euler.Data.YesNo
+                         Euler.Math.Binom,
+                         Euler.Math.Boolean,
+                         Euler.Math.ChooseMod,
+                         Euler.Math.Combinat,
+                         Euler.Math.Factorial,
+                         Euler.Math.IAU,
+                         Euler.Math.Misc,
+                         Euler.Math.Modular,
+                         Euler.Math.Modular.Prim
+                         Euler.Math.PowMod,
+                         Euler.Math.Primes,
+                         --Euler.Utils.FuncTools,
+                         Euler.Utils.IntTree,
+                         Euler.Utils.ListUtils,
+                         Euler.Utils.ListUtils.Split,
+                         --Euler.Utils.MemoTrie,
+                         Euler.Utils.TupleUtils,
+                         Euler.Utils.WebUtils,
+                         Euler.Utils.Misc
+    other-modules:       CLI.ArithmeticSequences,
+                         CLI.Lists
+    --other-extensions:    DataKinds,
+    --                     DefaultSignatures,
+    --                     DeriveFoldable,
+    --                     DeriveFunctor,
+    --                     DeriveGeneric,
+    --                     DeriveTraversable,
+    --                     FlexibleContexts,
+    --                     ForeignFunctionInterface,
+    --                     GADTs,
+    --                     GeneralizedNewtypeDeriving,
+    --                     KindSignatures,
+    --                     LambdaCase,
+    --                     NoImplicitPrelude,
+    --                     NPlusKPatterns,
+    --                     OverloadedStrings,
+    --                     PackageImports,
+    --                     PatternSynonyms,
+    --                     RankNTypes,
+    --                     ScopedTypeVariables,
+    --                     StandaloneDeriving,
+    --                     TypeFamilies,
+    --                     TypeOperators,
+    --                     ViewPatterns
+    other-extensions:    DataKinds,
+                         DeriveAnyClass,
+                         DeriveGeneric,
+                         ForeignFunctionInterface,
+                         GADTs,
+                         KindSignatures,
+                         NoCPP,
+                         NoImplicitPrelude,
+                         NPlusKPatterns,
+                         PatternSynonyms,
+                         ScopedTypeVariables,
+                         TypeFamilies,
+                         TypeOperators,
+                         ViewPatterns
+    build-depends:       base,
+                         array,
+                         containers,
+                         deepseq,
+                         --directory,
+                         --ghc-lib-parser,
+                         --main-tester,
+                         --process,
+                         QuickCheck,
+                         random,
+                         --stable-memo,
+                         --time,
+                         --unordered-containers,
+                         Win32
+    --mixins:              
+    build-tool-depends:  happy:happy ^>= 1.20.0
+
+
+-- 
+-- 
+-- NOTE HUnit is available via 'cabal install HUnit'
+-- (capture-io via 'cabal sandbox add-source C:/Users/kkurkiewicz/Desktop/capture-io')
+-- 
+test-suite test-euler
+
+    import:              shared-properties
+    type:                exitcode-stdio-1.0
+    hs-source-dirs:      src,
+                         testsuite
+    main-is:             Tests/Main.hs
+    other-modules:       CLI
+                         CLI.ArithmeticSequences,
+                         CLI.Lists,
+                         CLI.PromptForChoice,
+                         Euler.Data.PairingHeap,
+                         Euler.Data.PaulsonQueue,
+                         Euler.Data.PriorityQueue,
+                         Euler.Data.Queue,
+                         Euler.Data.SkewHeap,
+                         Euler.Math.Binom,
+                         Euler.Math.IAU,
+                         Euler.Math.Misc,
+                         Euler.Math.Modular,
+                         Euler.Math.Modular.Prim,
+                         Euler.Math.PowMod,
+                         Euler.Math.Primes,
+                         Euler.Problem001,
+                         Euler.Problem002,
+                         Euler.Problem003,
+                         Euler.Problem004,
+                         Euler.Problem005,
+                         Euler.Problem006,
+                         Euler.Problem007,
+                         Euler.Problem008,
+                         Euler.Problem009,
+                         Euler.Problem010,
+                         Euler.Problem011,
+                         Euler.Problem012,
+                         Euler.Problem013,
+                         Euler.Problem015,
+                         Euler.Problem016,
+                         Euler.Problem017,
+                         Euler.Problem018,
+                         Euler.Problem019,
+                         Euler.Problem020,
+                         Euler.Problem021,
+                         Euler.Problem022,
+                         Euler.Problem023,
+                         Euler.Problem024,
+                         Euler.Problem025,
+                         Euler.Problem026,
+                         Euler.Problem027,
+                         Euler.Problem028,
+                         Euler.Problem029,
+                         Euler.Problem030,
+                         Euler.Problem031.OGF
+                         Euler.Problem035,
+                         Euler.Problem036,
+                         Euler.Problem039,
+                         Euler.Problem040,
+                         Euler.Problem047,
+                         Euler.Problem048,
+                         Euler.Problem049,
+                         Euler.Problem050,
+                         Euler.Problem052,
+                         Euler.Problem053,
+                         Euler.Problem059,
+                         Euler.Problem069,
+                         Euler.Problem071,
+                         Euler.Problem072,
+                         Euler.Problem077,
+                         Euler.Problem079,
+                         Euler.Problem085,
+                         Euler.Problem096,
+                         Euler.Problem097,
+                         Euler.Problem112,
+                         Euler.Problem114,
+                         Euler.Problem204,
+                         Euler.Problem206,
+                         Euler.Problem231,
+                         Euler.Problem323,
+                         Euler.Problem327,
+                         Euler.Problem493,
+                         Euler.Problem657,
+                         Euler.Problem704,
+                         Euler.Problem709,
+                         Euler.Problem751,
+                         Euler.Problem759,
+                         Euler.Problem788,
+                         Euler.Utils.BoolUtils,
+                         Euler.Utils.ListUtils,
+                         Euler.Utils.ListUtils.Split,
+                         Euler.Utils.Misc,
+                         Euler.Utils.TupleUtils,
+                         Test.HUnit.Exts,
+                         Tests.Euler.Data.SkewHeap,
+                         Tests.Euler.Problem001,
+                         Tests.Euler.Problem002,
+                         Tests.Euler.Problem003,
+                         Tests.Euler.Problem004,
+                         Tests.Euler.Problem005,
+                         Tests.Euler.Problem006,
+                         Tests.Euler.Problem007,
+                         Tests.Euler.Problem008,
+                         Tests.Euler.Problem009,
+                         Tests.Euler.Problem010,
+                         Tests.Euler.Problem011,
+                         Tests.Euler.Problem012,
+                         Tests.Euler.Problem013,
+                         Tests.Euler.Problem015,
+                         Tests.Euler.Problem016,
+                         Tests.Euler.Problem017,
+                         Tests.Euler.Problem018,
+                         Tests.Euler.Problem019,
+                         Tests.Euler.Problem020,
+                         Tests.Euler.Problem021,
+                         Tests.Euler.Problem022,
+                         Tests.Euler.Problem023,
+                         Tests.Euler.Problem024,
+                         Tests.Euler.Problem025,
+                         Tests.Euler.Problem026,
+                         Tests.Euler.Problem027,
+                         Tests.Euler.Problem028,
+                         Tests.Euler.Problem029,
+                         Tests.Euler.Problem030,
+                         Tests.Euler.Problem031.OGF
+                         Tests.Euler.Problem035,
+                         Tests.Euler.Problem036,
+                         Tests.Euler.Problem039,
+                         Tests.Euler.Problem040,
+                         Tests.Euler.Problem047,
+                         Tests.Euler.Problem048,
+                         Tests.Euler.Problem049
+                         Tests.Euler.Problem050,
+                         Tests.Euler.Problem052,
+                         Tests.Euler.Problem053,
+                         Tests.Euler.Problem059,
+                         Tests.Euler.Problem069,
+                         Tests.Euler.Problem071,
+                         Tests.Euler.Problem072,
+                         Tests.Euler.Problem076.Problem076,
+                         Tests.Euler.Problem077,
+                         Tests.Euler.Problem078,
+                         Tests.Euler.Problem079,
+                         Tests.Euler.Problem085,
+                         Tests.Euler.Problem096,
+                         Tests.Euler.Problem097,
+                         Tests.Euler.Problem112,
+                         Tests.Euler.Problem114,
+                         Tests.Euler.Problem188,
+                         Tests.Euler.Problem204,
+                         Tests.Euler.Problem206,
+                         Tests.Euler.Problem231,
+                         Tests.Euler.Problem323,
+                         Tests.Euler.Problem327,
+                         Tests.Euler.Problem365,
+                         Tests.Euler.Problem443,
+                         Tests.Euler.Problem493,
+                         Tests.Euler.Problem657,
+                         Tests.Euler.Problem704,
+                         Tests.Euler.Problem709,
+                         Tests.Euler.Problem751,
+                         Tests.Euler.Problem758,
+                         Tests.Euler.Problem759,
+                         Tests.Euler.Problem788
+    other-extensions:    DeriveGeneric,
+                         StandaloneDeriving,
+                         TemplateHaskell
+    build-depends:       base                 ^>= 4.12.0.0,
+                         array                ^>= 0.5.3.0,
+                         capture-io,
+                         containers           ^>= 0.6.0.1,
+                         --deepseq              ^>= 1.4.7.0,
+                         deepseq              ^>= 1.4.4.0,
+                         --directory            ^>= 1.3.3.0,
+                         euler-internal,
+                         --ghc                  == 8.6.5,
+                         --ghc-lib-parser       ^>= 9.2.3.20220527,
+                         HUnit                 ^>= 1.6.2.0,
+                         --main-tester          ^>= 0.2.0.1,
+                         --process              ^>= 1.6.14.0,
+                         QuickCheck           ^>= 2.14.2,
+                         random               ^>= 1.1,
+                         --stable-memo          ^>= 0.3.1,
+                         template-haskell,
+                         th-jailbreak,
+                         --time                 ^>= 1.8.0.2,
+                         --unordered-containers ^>= 0.2.19.1,
+                         Win32                ^>= 2.6.1.0
+    ghc-options:         -with-rtsopts=-K1K
+
+
+-- 
+executable euler
+
+    import:              shared-properties
+    hs-source-dirs:      src
+    main-is:             Main.hs
+    other-modules:       CLI,
+                         CLI.ArithmeticSequences,
+                         CLI.Lists,
+                         CLI.PromptForChoice,
+                         Euler.Data.PairingHeap,
+                         Euler.Data.PaulsonQueue,
+                         Euler.Data.Queue,
+                         Euler.Math.Binom,
+                         Euler.Math.IAU,
+                         Euler.Math.Misc,
+                         Euler.Math.Modular,
+                         Euler.Math.Modular.Prim,
+                         Euler.Math.PowMod,
+                         Euler.Math.Primes,
+                         Euler.Problem001,
+                         Euler.Problem002,
+                         Euler.Problem003,
+                         Euler.Problem004,
+                         Euler.Problem005,
+                         Euler.Problem006,
+                         Euler.Problem007,
+                         Euler.Problem008,
+                         Euler.Problem009,
+                         Euler.Problem010,
+                         Euler.Problem011,
+                         Euler.Problem012,
+                         Euler.Problem013,
+                         Euler.Problem015,
+                         Euler.Problem016,
+                         Euler.Problem017,
+                         Euler.Problem018,
+                         Euler.Problem019,
+                         Euler.Problem020,
+                         Euler.Problem021,
+                         Euler.Problem022,
+                         Euler.Problem023,
+                         Euler.Problem024,
+                         Euler.Problem025,
+                         Euler.Problem026,
+                         Euler.Problem027,
+                         Euler.Problem028,
+                         Euler.Problem029,
+                         Euler.Problem030,
+                         Euler.Problem031.OGF,
+                         Euler.Problem035,
+                         Euler.Problem036,
+                         Euler.Problem039,
+                         Euler.Problem040,
+                         Euler.Problem047,
+                         Euler.Problem048,
+                         Euler.Problem049,
+                         Euler.Problem050,
+                         Euler.Problem052,
+                         Euler.Problem053,
+                         Euler.Problem059,
+                         Euler.Problem069,
+                         Euler.Problem071,
+                         Euler.Problem072,
+                         Euler.Problem076.Problem076,
+                         Euler.Problem077,
+                         Euler.Problem078,
+                         Euler.Problem079,
+                         Euler.Problem085,
+                         --Euler.Problem092,
+                         Euler.Problem096,
+                         Euler.Problem097,
+                         Euler.Problem112,
+                         Euler.Problem114,
+                         Euler.Problem188,
+                         Euler.Problem204,
+                         Euler.Problem206,
+                         Euler.Problem231,
+                         Euler.Problem323,
+                         Euler.Problem327,
+                         Euler.Problem365,
+                         --Euler.Problem401,
+                         Euler.Problem443,
+                         Euler.Problem493,
+                         --Euler.Problem521,
+                         Euler.Problem657,
+                         Euler.Problem704,
+                         Euler.Problem709,
+                         Euler.Problem751,
+                         Euler.Problem758,
+                         Euler.Problem759,
+                         Euler.Problem788,
+                         Euler.Utils.BoolUtils,
+                         Euler.Utils.IntTree,
+                         Euler.Utils.ListUtils,
+                         Euler.Utils.ListUtils.Split,
+                         Euler.Utils.Misc,
+                         Euler.Utils.TupleUtils,
+                         Euler.Utils.WebUtils
+    --other-extensions:    
+    build-depends:       base                 ^>= 4.12.0.0,
+                         array                ^>= 0.5.3.0,
+                         containers           ^>= 0.6.0.1,
+                         --deepseq              ^>= 1.4.7.0,
+                         deepseq              ^>= 1.4.4.0,
+                         --directory            ^>= 1.3.3.0,
+                         euler-internal,
+                         --ghc-lib-parser       ^>= 9.2.3.20220527,
+                         --main-tester          ^>= 0.2.0.1,
+                         --process              ^>= 1.6.14.0,
+                         QuickCheck           ^>= 2.14.2,
+                         random               ^>= 1.1,
+                         --stable-memo          ^>= 0.3.1,
+                         --time                 ^>= 1.8.0.2,
+                         --unordered-containers ^>= 0.2.19.1,
+                         Win32                ^>= 2.6.1.0
+    --mixins:              
+

@@ -1,0 +1,12 @@
+cradle:
+  cabal:
+    - path: "./src/Euler/Data"
+      component: "lib:euler-internal"
+    - path: "./src/Euler/Math"
+      component: "lib:euler-internal"
+    - path: "./src/Euler/Utils"
+      component: "lib:euler-internal"
+    - path: "./testsuite"
+      component: "test:test-euler"
+    - path: "./src"
+      component: "exe:euler"
